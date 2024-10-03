@@ -4,12 +4,12 @@ class Human {
   String name;
   String surname;
   int age;
-  List<Adress> addreses;
+  List<Address> addresses;
 
   Human({
     required this.name,
     required this.surname,
     required this.age,
-    required this.addreses,
+    required this.addresses,
   });
 }
