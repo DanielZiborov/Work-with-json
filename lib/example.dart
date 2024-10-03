@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:work_with_json/human.dart';
 
 class Example extends StatelessWidget {
   const Example({super.key});
@@ -51,8 +54,10 @@ class JsonExampleProvider extends InheritedWidget {
   }
 
   static JsonExampleProvider? read(BuildContext context) {
-    final widget = context.getElementForInheritedWidgetOfExactType<JsonExampleProvider>()?.widget;
-    return widget is JsonExampleProvider? widget: null;
+    final widget = context
+        .getElementForInheritedWidgetOfExactType<JsonExampleProvider>()
+        ?.widget;
+    return widget is JsonExampleProvider ? widget : null;
   }
 
   @override
@@ -61,7 +66,15 @@ class JsonExampleProvider extends InheritedWidget {
   }
 }
 
-class JsonExampleCoder{
+String jsonString = '';
+
+class JsonExampleCoder {
   void encode() {}
-  void decode() {}
+  void decode() {
+    final json = jsonDecode(jsonString) as List<dynamic>;
+    final humans = json
+        .map((dynamic e) => Human.fromJson(e as Map<String, dynamic>))
+        .toList();
+    print(humans);
+  }
 }
