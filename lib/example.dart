@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:work_with_json/example_data.dart';
 import 'package:work_with_json/human.dart';
 
 class Example extends StatelessWidget {
@@ -28,11 +29,11 @@ class ButtonWidget extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => JsonExampleProvider.read(context)?.coder.encode(),
             child: const Text("Кодировать"),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => JsonExampleProvider.read(context)?.coder.decode(),
             child: const Text("Декодировать"),
           ),
         ],
@@ -66,15 +67,28 @@ class JsonExampleProvider extends InheritedWidget {
   }
 }
 
-String jsonString = '';
-
 class JsonExampleCoder {
-  void encode() {}
+  void encode() {
+    try {
+      final objects = humans.map(
+        (e) => e.toJson(),
+      ).toList();
+      jsonString = jsonEncode(objects);
+      print(jsonString);
+    } catch (error) {
+      print(error);
+    }
+  }
+
   void decode() {
-    final json = jsonDecode(jsonString) as List<dynamic>;
-    final humans = json
-        .map((dynamic e) => Human.fromJson(e as Map<String, dynamic>))
-        .toList();
-    print(humans);
+    try {
+      final json = jsonDecode(jsonString) as List<dynamic>;
+      final humans = json
+          .map((dynamic e) => Human.fromJson(e as Map<String, dynamic>))
+          .toList();
+      print(humans);
+    } catch (error) {
+      print(error);
+    }
   }
 }

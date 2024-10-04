@@ -19,4 +19,13 @@ class Address {
       flat: json["flat"] as int,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'city': city,
+      'street': street,
+      'house': house,
+      'flat': flat,
+    };
+  }
 }

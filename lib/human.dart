@@ -25,4 +25,15 @@ class Human {
           .toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'surname': surname,
+      'age': age,
+      'addresses': addresses.map((e) => e.toJson()).toList(),
+    };
+  }
 }
+
+String jsonString = "";
